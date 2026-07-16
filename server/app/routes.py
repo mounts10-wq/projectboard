@@ -6,7 +6,7 @@ from flask_jwt_extended import (
 )
 
 from . import db
-from .models import User
+from .models import User, Board
 
 api = Blueprint("api", __name__)
 
@@ -78,7 +78,7 @@ def login():
 @jwt_required()
 def get_current_user():
     user_id = int(get_jwt_identity())
-    user = User.query.get(user_id)
+    user = db.session.get(User, user_id)
 
     if not user:
         return jsonify({"error": "User not found"}), 404
@@ -91,3 +91,119 @@ def logout():
     return jsonify({
         "message": "Logout successful. Remove the token on the frontend."
     }), 200
+
+
+@api.route("/boards", methods=["GET"])
+@jwt_required()
+def get_boards():
+    user_id = int(get_jwt_identity())
+
+    page = request.args.get("page", 1, type=int)
+    per_page = request.args.get("per_page", 10, type=int)
+
+    paginated_boards = Board.query.filter_by(user_id=user_id) \
+        .order_by(Board.created_at.desc()) \
+        .paginate(page=page, per_page=per_page, error_out=False)
+
+    boards = [board.to_dict() for board in paginated_boards.items]
+
+    return jsonify({
+        "boards": boards,
+        "page": paginated_boards.page,
+        "per_page": paginated_boards.per_page,
+        "total": paginated_boards.total,
+        "pages": paginated_boards.pages
+    }), 200
+
+
+@api.route("/boards", methods=["POST"])
+@jwt_required()
+def create_board():
+    user_id = int(get_jwt_identity())
+    data = request.get_json()
+
+    title = data.get("title", "").strip()
+    hobby_type = data.get("hobby_type", "").strip()
+    description = data.get("description", "").strip()
+
+    if not title or not hobby_type:
+        return jsonify({"error": "Title and hobby type are required"}), 400
+
+    board = Board(
+        title=title,
+        hobby_type=hobby_type,
+        description=description,
+        user_id=user_id
+    )
+
+    db.session.add(board)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Board created successfully",
+        "board": board.to_dict()
+    }), 201
+
+
+@api.route("/boards/<int:board_id>", methods=["GET"])
+@jwt_required()
+def get_board(board_id):
+    user_id = int(get_jwt_identity())
+
+    board = Board.query.filter_by(id=board_id, user_id=user_id).first()
+
+    if not board:
+        return jsonify({"error": "Board not found"}), 404
+
+    return jsonify({"board": board.to_dict(include_tasks=True)}), 200
+
+
+@api.route("/boards/<int:board_id>", methods=["PATCH"])
+@jwt_required()
+def update_board(board_id):
+    user_id = int(get_jwt_identity())
+
+    board = Board.query.filter_by(id=board_id, user_id=user_id).first()
+
+    if not board:
+        return jsonify({"error": "Board not found"}), 404
+
+    data = request.get_json()
+
+    if "title" in data:
+        title = data.get("title", "").strip()
+        if not title:
+            return jsonify({"error": "Title cannot be empty"}), 400
+        board.title = title
+
+    if "hobby_type" in data:
+        hobby_type = data.get("hobby_type", "").strip()
+        if not hobby_type:
+            return jsonify({"error": "Hobby type cannot be empty"}), 400
+        board.hobby_type = hobby_type
+
+    if "description" in data:
+        board.description = data.get("description", "").strip()
+
+    db.session.commit()
+
+    return jsonify({
+        "message": "Board updated successfully",
+        "board": board.to_dict()
+    }), 200
+
+
+@api.route("/boards/<int:board_id>", methods=["DELETE"])
+@jwt_required()
+def delete_board(board_id):
+    user_id = int(get_jwt_identity())
+
+    board = Board.query.filter_by(id=board_id, user_id=user_id).first()
+
+    if not board:
+        return jsonify({"error": "Board not found"}), 404
+
+    db.session.delete(board)
+    db.session.commit()
+
+    return jsonify({"message": "Board deleted successfully"}), 200
