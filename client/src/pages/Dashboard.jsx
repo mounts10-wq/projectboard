@@ -28,7 +28,17 @@ function Dashboard() {
       setLoading(false);
     }
   }
+   
+   async function handleUpdateBoard(boardId, updates) {
+     const data = await apiRequest(`/boards/${boardId}`, {
+       method: "PATCH",
+       body: JSON.stringify(updates),
+    });
 
+    setBoards(
+       boards.map((board) => (board.id === boardId ? data.board : board))
+    );
+   }
   async function handleCreateBoard(formData) {
     const data = await apiRequest("/boards", {
       method: "POST",
@@ -82,6 +92,7 @@ function Dashboard() {
             key={board.id}
             board={board}
             onDeleteBoard={handleDeleteBoard}
+            onUpdateBoard={handleUpdateBoard}
           />
         ))}
       </div>
