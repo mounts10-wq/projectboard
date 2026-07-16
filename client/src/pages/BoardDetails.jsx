@@ -76,7 +76,7 @@ function BoardDetails() {
   }
 
   if (loading) {
-    return <p>Loading board...</p>;
+    return <p className="loading-message">Loading board...</p>;
   }
 
   if (error) {
@@ -84,7 +84,7 @@ function BoardDetails() {
   }
 
   if (!board) {
-    return <p>Board not found.</p>;
+    return <p className="empty-state">Board not found.</p>;
   }
 
   return (
@@ -102,10 +102,13 @@ function BoardDetails() {
       <TaskForm onCreateTask={handleCreateTask} />
 
       <div className="task-section">
-        <h2>Tasks</h2>
+        <div className="task-section-header">
+          <h2>Tasks</h2>
+          <span className="count-pill">{tasks.length} total</span>
+        </div>
 
         {tasks.length === 0 ? (
-          <p>No tasks yet. Add your first task above.</p>
+          <p className="empty-state">No tasks yet. Add your first task above.</p>
         ) : (
           <div className="task-list">
             {tasks.map((task) => (

@@ -12,6 +12,18 @@ function TaskCard({ task, onUpdateTask, onDeleteTask }) {
 
   const [error, setError] = useState("");
 
+  const statusClassMap = {
+    "Not Started": "status-not-started",
+    "In Progress": "status-in-progress",
+    Complete: "status-complete",
+  };
+
+  const priorityClassMap = {
+    Low: "priority-low",
+    Medium: "priority-medium",
+    High: "priority-high",
+  };
+
   function handleChange(event) {
     setFormData({
       ...formData,
@@ -117,6 +129,14 @@ function TaskCard({ task, onUpdateTask, onDeleteTask }) {
     <article className="task-card">
       <div>
         <h3>{task.title}</h3>
+        <div className="task-meta">
+          <span className={`task-badge ${statusClassMap[task.status] || "status-not-started"}`}>
+            {task.status}
+          </span>
+          <span className={`task-badge ${priorityClassMap[task.priority] || "priority-medium"}`}>
+            {task.priority} Priority
+          </span>
+        </div>
         <p>{task.description || "No description added."}</p>
 
         <div className="task-controls">

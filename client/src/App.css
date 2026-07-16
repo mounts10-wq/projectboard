@@ -1,27 +1,27 @@
 :root {
-  --bg: #f4f7fb;
-  --surface: #ffffff;
-  --surface-soft: #f8fafc;
-  --text: #0f172a;
-  --text-soft: #475569;
-  --border: #dbe4ee;
-  --brand: #0f4c81;
-  --brand-strong: #0b3b64;
-  --success: #15803d;
-  --success-strong: #166534;
-  --warn: #b45309;
-  --warn-strong: #92400e;
-  --danger: #b91c1c;
-  --danger-strong: #991b1b;
-  --ring: rgba(15, 76, 129, 0.22);
-  --card-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  --bg: #f4efe7;
+  --surface: #fffcf8;
+  --surface-soft: #f7f1e9;
+  --text: #2e241f;
+  --text-soft: #5f4f47;
+  --border: #e8d9cb;
+  --brand: #0f766e;
+  --brand-strong: #115e59;
+  --success: #2f855a;
+  --success-strong: #276749;
+  --warn: #c05621;
+  --warn-strong: #9c4221;
+  --danger: #c53030;
+  --danger-strong: #9b2c2c;
+  --ring: rgba(15, 118, 110, 0.24);
+  --card-shadow: 0 10px 24px rgba(72, 44, 28, 0.1);
   --radius: 12px;
 }
 
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: radial-gradient(circle at top, #f9fbff 0%, var(--bg) 42%, #eef3f9 100%);
+  background: radial-gradient(circle at top, #fff8f1 0%, var(--bg) 42%, #efe5d9 100%);
   color: var(--text);
   line-height: 1.5;
 }
@@ -40,14 +40,14 @@ p {
 }
 
 .navbar {
-  background: linear-gradient(90deg, #0d2034, #153a5a);
+  background: linear-gradient(90deg, #263238, #3a2c23);
   color: white;
   padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.28);
+  box-shadow: 0 4px 14px rgba(44, 29, 19, 0.32);
 }
 
 .logo {
@@ -110,7 +110,7 @@ p {
 }
 
 .hero {
-  background: linear-gradient(135deg, #0f2a45, #1d4f7f 45%, #2563eb 100%);
+  background: linear-gradient(135deg, #6b3f2f, #9a583f 48%, #0f766e 100%);
   color: white;
   padding: 3rem 2rem;
   border-radius: 18px;
@@ -140,12 +140,12 @@ p {
 }
 
 .primary-button {
-  background: #ffffff;
-  color: #153a5a;
+  background: #fff7ee;
+  color: #533728;
 }
 
 .primary-button:hover {
-  background: #f2f6fb;
+  background: #fff2e1;
 }
 
 .secondary-button,
@@ -205,7 +205,7 @@ p {
   flex-direction: column;
   gap: 0.35rem;
   font-weight: 600;
-  color: #1e293b;
+  color: #3b2e26;
 }
 
 .auth-form input,
@@ -219,11 +219,11 @@ p {
 .edit-form textarea,
 .edit-form select {
   padding: 0.7rem 0.78rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #d7c7b9;
   border-radius: 9px;
   font-size: 0.96rem;
   color: var(--text);
-  background: #fff;
+  background: #fffdfb;
 }
 
 .board-form textarea,
@@ -279,7 +279,7 @@ p {
 .auth-form button:disabled,
 .board-form button:disabled,
 .task-form button:disabled {
-  background: #94a3b8;
+  background: #a89d92;
   cursor: not-allowed;
 }
 
@@ -348,7 +348,7 @@ p {
 .board-card p,
 .task-card p,
 .board-detail-header p {
-  color: #334155;
+  color: #5f4f47;
 }
 
 .board-card-actions {
@@ -378,12 +378,12 @@ p {
 }
 
 .cancel-button {
-  background: #64748b;
+  background: #7a6a5d;
   color: #fff;
 }
 
 .cancel-button:hover {
-  background: #475569;
+  background: #645448;
 }
 
 .back-link {
@@ -407,9 +407,91 @@ p {
   margin-top: 1.55rem;
 }
 
+.task-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.count-pill {
+  background: var(--surface-soft);
+  color: var(--brand-strong);
+  border: 1px solid #d7c7b9;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.28rem 0.6rem;
+}
+
 .task-list {
   display: grid;
   gap: 0.9rem;
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 0.6rem;
+}
+
+.task-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.34rem 0.56rem;
+  border: 1px solid transparent;
+}
+
+.status-not-started {
+  background: #f5e4cf;
+  color: #7a4d21;
+  border-color: #e6c9a8;
+}
+
+.status-in-progress {
+  background: #dce9f3;
+  color: #24557c;
+  border-color: #bcd3e6;
+}
+
+.status-complete {
+  background: #d7efe3;
+  color: #1f6d4b;
+  border-color: #b5dec9;
+}
+
+.priority-low {
+  background: #dff2e5;
+  color: #2f855a;
+  border-color: #c2e5cf;
+}
+
+.priority-medium {
+  background: #f8e8cd;
+  color: #9c5d1d;
+  border-color: #efd4a8;
+}
+
+.priority-high {
+  background: #f7d8d8;
+  color: #9b2c2c;
+  border-color: #eeb4b4;
+}
+
+.loading-message,
+.empty-state {
+  background: var(--surface-soft);
+  border: 1px dashed #ccb7a4;
+  color: var(--text-soft);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin: 0.5rem 0 1rem;
 }
 
 .task-controls {

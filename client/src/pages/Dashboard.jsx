@@ -79,11 +79,11 @@ function Dashboard() {
 
       <BoardForm onCreateBoard={handleCreateBoard} />
 
-      {loading && <p>Loading boards...</p>}
+      {loading && <p className="loading-message">Loading boards...</p>}
       {error && <p className="error-message">{error}</p>}
 
       {!loading && boards.length === 0 && (
-        <p>You do not have any boards yet. Create your first one above.</p>
+        <p className="empty-state">You do not have any boards yet. Create your first one above.</p>
       )}
 
       <div className="board-grid">
