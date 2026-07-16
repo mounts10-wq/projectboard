@@ -116,6 +116,7 @@ p {
   border-radius: 18px;
   text-align: center;
   box-shadow: var(--card-shadow);
+  animation: fade-slide-up 420ms ease-out both;
 }
 
 .hero h1 {
@@ -169,6 +170,15 @@ p {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--card-shadow);
+}
+
+.form-page,
+.board-form,
+.board-detail-header,
+.task-form,
+.loading-message,
+.empty-state {
+  animation: fade-slide-up 360ms ease-out both;
 }
 
 .form-page {
@@ -326,6 +336,22 @@ p {
 .board-card,
 .task-card {
   padding: 1.1rem;
+  animation: fade-slide-up 320ms ease-out both;
+}
+
+.board-card:nth-child(2),
+.task-card:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.board-card:nth-child(3),
+.task-card:nth-child(3) {
+  animation-delay: 110ms;
+}
+
+.board-card:nth-child(4),
+.task-card:nth-child(4) {
+  animation-delay: 160ms;
 }
 
 .board-card {
@@ -343,6 +369,26 @@ p {
   color: var(--brand);
   font-weight: 700;
   margin-bottom: 0.35rem;
+}
+
+.hobby-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.6rem;
+}
+
+.hobby-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.22rem 0.56rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: #e6f3f1;
+  color: #0f5d57;
+  border: 1px solid #bfded9;
 }
 
 .board-card p,
@@ -492,6 +538,45 @@ p {
   border-radius: 10px;
   padding: 0.9rem 1rem;
   margin: 0.5rem 0 1rem;
+}
+
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .form-page,
+  .board-form,
+  .board-card,
+  .board-detail-header,
+  .task-form,
+  .task-card,
+  .loading-message,
+  .empty-state {
+    animation: none;
+  }
+
+  .nav-button,
+  .danger-button,
+  .edit-button,
+  .save-edit-button,
+  .cancel-button,
+  .auth-form button,
+  .board-form button,
+  .task-form button,
+  .primary-button,
+  .secondary-button,
+  .view-button {
+    transition: none;
+  }
 }
 
 .task-controls {

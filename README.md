@@ -135,6 +135,29 @@ Note: client/src/services/api.js currently points to http://127.0.0.1:5000/api.
 - README with setup + feature documentation
 - Optional deployed links (Render/Netlify/etc.)
 
+## Demo Script (2-3 Minutes)
+
+1. Problem and audience
+- "Hobby projects get scattered across notes, messages, and memory. HobbyBoard gives makers one place to organize boards and tasks."
+
+2. Quick architecture
+- "This app uses React on the frontend and Flask + SQLAlchemy on the backend, with JWT authentication and ownership-based authorization."
+
+3. Auth flow
+- Create a user (or log in), then show that dashboard data is user-specific.
+
+4. Board CRUD
+- Create a new board, edit it, and delete one board to show full CRUD.
+
+5. Task CRUD inside a board
+- Open a board, add tasks, change status/priority, edit a task, and delete a task.
+
+6. Ownership/security callout
+- "All board/task routes are protected. Users can only read and modify their own records."
+
+7. Wrap-up
+- "HobbyBoard makes large hobby projects less overwhelming by turning ideas into trackable steps."
+
 ## Future Enhancements
 
 - Materials list per board

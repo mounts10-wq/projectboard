@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 function BoardCard({ board, onDeleteBoard, onUpdateBoard }) {
   const [isEditing, setIsEditing] = useState(false);
 
+  const hobbyTags = board.hobby_type
+    .split(",")
+    .map((tag) => tag.trim())
+    .filter(Boolean)
+    .slice(0, 3);
+
   const [formData, setFormData] = useState({
     title: board.title,
     hobby_type: board.hobby_type,
@@ -94,6 +100,15 @@ function BoardCard({ board, onDeleteBoard, onUpdateBoard }) {
       <div>
         <h3>{board.title}</h3>
         <p className="board-type">{board.hobby_type}</p>
+        {hobbyTags.length > 0 && (
+          <div className="hobby-tag-row">
+            {hobbyTags.map((tag) => (
+              <span key={`${board.id}-${tag}`} className="hobby-tag">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
         <p>{board.description || "No description added yet."}</p>
       </div>
 
