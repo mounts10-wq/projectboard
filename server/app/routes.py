@@ -6,7 +6,7 @@ from flask_jwt_extended import (
 )
 
 from . import db
-from .models import User, Board
+from .models import User, Board, Task
 
 api = Blueprint("api", __name__)
 
@@ -207,3 +207,140 @@ def delete_board(board_id):
     db.session.commit()
 
     return jsonify({"message": "Board deleted successfully"}), 200
+
+@api.route("/boards/<int:board_id>/tasks", methods=["GET"])
+@jwt_required()
+def get_tasks_for_board(board_id):
+    user_id = int(get_jwt_identity())
+
+    board = Board.query.filter_by(id=board_id, user_id=user_id).first()
+
+    if not board:
+        return jsonify({"error": "Board not found"}), 404
+
+    page = request.args.get("page", 1, type=int)
+    per_page = request.args.get("per_page", 10, type=int)
+
+    paginated_tasks = Task.query.filter_by(board_id=board.id) \
+        .order_by(Task.created_at.desc()) \
+        .paginate(page=page, per_page=per_page, error_out=False)
+
+    tasks = [task.to_dict() for task in paginated_tasks.items]
+
+    return jsonify({
+        "tasks": tasks,
+        "page": paginated_tasks.page,
+        "per_page": paginated_tasks.per_page,
+        "total": paginated_tasks.total,
+        "pages": paginated_tasks.pages
+    }), 200
+
+
+@api.route("/boards/<int:board_id>/tasks", methods=["POST"])
+@jwt_required()
+def create_task(board_id):
+    user_id = int(get_jwt_identity())
+
+    board = Board.query.filter_by(id=board_id, user_id=user_id).first()
+
+    if not board:
+        return jsonify({"error": "Board not found"}), 404
+
+    data = request.get_json()
+
+    title = data.get("title", "").strip()
+    description = data.get("description", "").strip()
+    status = data.get("status", "Not Started").strip()
+    priority = data.get("priority", "Medium").strip()
+
+    if not title:
+        return jsonify({"error": "Task title is required"}), 400
+
+    task = Task(
+        title=title,
+        description=description,
+        status=status,
+        priority=priority,
+        board_id=board.id
+    )
+
+    db.session.add(task)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Task created successfully",
+        "task": task.to_dict()
+    }), 201
+
+
+@api.route("/tasks/<int:task_id>", methods=["GET"])
+@jwt_required()
+def get_task(task_id):
+    user_id = int(get_jwt_identity())
+
+    task = Task.query.join(Board).filter(
+        Task.id == task_id,
+        Board.user_id == user_id
+    ).first()
+
+    if not task:
+        return jsonify({"error": "Task not found"}), 404
+
+    return jsonify({"task": task.to_dict()}), 200
+
+
+@api.route("/tasks/<int:task_id>", methods=["PATCH"])
+@jwt_required()
+def update_task(task_id):
+    user_id = int(get_jwt_identity())
+
+    task = Task.query.join(Board).filter(
+        Task.id == task_id,
+        Board.user_id == user_id
+    ).first()
+
+    if not task:
+        return jsonify({"error": "Task not found"}), 404
+
+    data = request.get_json()
+
+    if "title" in data:
+        title = data.get("title", "").strip()
+        if not title:
+            return jsonify({"error": "Task title cannot be empty"}), 400
+        task.title = title
+
+    if "description" in data:
+        task.description = data.get("description", "").strip()
+
+    if "status" in data:
+        task.status = data.get("status", "").strip()
+
+    if "priority" in data:
+        task.priority = data.get("priority", "").strip()
+
+    db.session.commit()
+
+    return jsonify({
+        "message": "Task updated successfully",
+        "task": task.to_dict()
+    }), 200
+
+
+@api.route("/tasks/<int:task_id>", methods=["DELETE"])
+@jwt_required()
+def delete_task(task_id):
+    user_id = int(get_jwt_identity())
+
+    task = Task.query.join(Board).filter(
+        Task.id == task_id,
+        Board.user_id == user_id
+    ).first()
+
+    if not task:
+        return jsonify({"error": "Task not found"}), 404
+
+    db.session.delete(task)
+    db.session.commit()
+
+    return jsonify({"message": "Task deleted successfully"}), 200
