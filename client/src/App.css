@@ -456,3 +456,10 @@ body {
 .cancel-button:hover {
   background: #4b5563;
 }
+
+.edit-form select {
+  padding: 0.7rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
