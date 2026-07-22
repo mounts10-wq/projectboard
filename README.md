@@ -107,7 +107,7 @@ DATABASE_URL=sqlite:///projectboard.db
 Run migrations once:
 
 ```bash
-flask --app run.py db upgrade
+python3 -m flask --app run.py db upgrade
 ```
 
 ### 3. Frontend setup (one-time)
@@ -126,7 +126,7 @@ Terminal 1 (backend):
 ```bash
 cd projectboard/server
 source venv/bin/activate
-flask --app run.py db upgrade
+python3 -m flask --app run.py db upgrade
 python3 run.py
 ```
 
