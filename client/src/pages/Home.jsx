@@ -5,7 +5,7 @@ function Home() {
     <section className="hero">
       <h1>Organize every hobby project in one place.</h1>
       <p>
-        HobbyBoard helps makers, builders, and hobbyists create project boards,
+        ProjectBoard helps makers, builders, and hobbyists create project boards,
         track tasks, and manage progress without scattered notes.
       </p>
 

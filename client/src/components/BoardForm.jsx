@@ -45,7 +45,7 @@ function BoardForm({ onCreateBoard }) {
 
   return (
     <form onSubmit={handleSubmit} className="board-form">
-      <h2>Create a New Hobby Board</h2>
+      <h2>Create a New Project Board</h2>
 
       <label>
         Board Title
@@ -59,7 +59,7 @@ function BoardForm({ onCreateBoard }) {
       </label>
 
       <label>
-        Hobby Type
+        Project Type
         <input
           type="text"
           name="hobby_type"

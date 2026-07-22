@@ -1,6 +1,6 @@
-# HobbyBoard
+# ProjectBoard
 
-HobbyBoard is a full-stack productivity app built for the Flatiron School Project 2 capstone. It helps hobbyists organize project boards and break work into manageable tasks.
+ProjectBoard is a full-stack productivity app built for the Flatiron School Project 2 capstone. It helps hobbyists organize project boards and break work into manageable tasks.
 
 Target users include makers, builders, and creatives working on projects like car restoration, crochet, woodworking, gardening, photography, and cooking.
 
@@ -86,7 +86,7 @@ All backend routes are served under /api.
 
 ```bash
 git clone <your-repo-url>
-cd hobbyboard
+cd projectboard
 ```
 
 ### 2. Backend setup
@@ -103,7 +103,7 @@ Create a .env file in server/:
 ```env
 SECRET_KEY=dev-secret-key
 JWT_SECRET_KEY=dev-jwt-secret-key
-DATABASE_URL=sqlite:///hobbyboard.db
+DATABASE_URL=sqlite:///projectboard.db
 ```
 
 Run migrations and start API:
@@ -138,7 +138,7 @@ Note: client/src/services/api.js currently points to http://127.0.0.1:5000/api.
 ## Demo Script (2-3 Minutes)
 
 1. Problem and audience
-- "Hobby projects get scattered across notes, messages, and memory. HobbyBoard gives makers one place to organize boards and tasks."
+- "Hobby projects get scattered across notes, messages, and memory. ProjectBoard gives makers one place to organize boards and tasks."
 
 2. Quick architecture
 - "This app uses React on the frontend and Flask + SQLAlchemy on the backend, with JWT authentication and ownership-based authorization."
@@ -156,7 +156,7 @@ Note: client/src/services/api.js currently points to http://127.0.0.1:5000/api.
 - "All board/task routes are protected. Users can only read and modify their own records."
 
 7. Wrap-up
-- "HobbyBoard makes large hobby projects less overwhelming by turning ideas into trackable steps."
+- "ProjectBoard makes large hobby projects less overwhelming by turning ideas into trackable steps."
 
 ## Future Enhancements
 

@@ -13,7 +13,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
-        HobbyBoard
+        ProjectBoard
       </Link>
 
       <div className="nav-links">

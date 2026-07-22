@@ -1,6 +1,6 @@
-# HobbyBoard Client
+# ProjectBoard Client
 
-This folder contains the React frontend for HobbyBoard.
+This folder contains the React frontend for ProjectBoard.
 
 For full project documentation (project overview, backend setup, API routes, and submission details), see the root README:
 
