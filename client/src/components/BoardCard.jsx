@@ -30,7 +30,7 @@ function BoardCard({ board, onDeleteBoard, onUpdateBoard }) {
     setError("");
 
     if (!formData.title.trim() || !formData.hobby_type.trim()) {
-      setError("Title and hobby type are required.");
+      setError("Title and project type are required.");
       return;
     }
 
@@ -57,7 +57,7 @@ function BoardCard({ board, onDeleteBoard, onUpdateBoard }) {
           </label>
 
           <label>
-            Hobby Type
+            Project Type
             <input
               type="text"
               name="hobby_type"

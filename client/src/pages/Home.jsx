@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <section className="hero">
-      <h1>Organize every hobby project in one place.</h1>
+      <h1>Organize every project in one place.</h1>
       <p>
         ProjectBoard helps makers, builders, and hobbyists create project boards,
         track tasks, and manage progress without scattered notes.

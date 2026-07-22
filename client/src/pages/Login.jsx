@@ -39,7 +39,7 @@ function Login() {
   return (
     <section className="form-page">
       <h1>Login</h1>
-      <p>Log in to view your hobby boards.</p>
+      <p>Log in to view your project boards.</p>
 
       <form onSubmit={handleSubmit} className="auth-form">
         <label>

@@ -40,7 +40,7 @@ function Signup() {
   return (
     <section className="form-page">
       <h1>Create an Account</h1>
-      <p>Sign up to start organizing your hobby projects.</p>
+      <p>Sign up to start organizing your projects.</p>
 
       <form onSubmit={handleSubmit} className="auth-form">
         <label>
