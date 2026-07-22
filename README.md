@@ -85,7 +85,7 @@ All backend routes are served under /api.
 ### 1. Clone and enter project
 
 ```bash
-git clone <your-repo-url>
+git clone <this-repo-url>
 cd projectboard
 ```
 
