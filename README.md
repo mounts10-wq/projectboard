@@ -4,13 +4,6 @@ ProjectBoard is a full-stack productivity app built for the Flatiron School Proj
 
 Target users include makers, builders, and creatives working on projects like car restoration, crochet, woodworking, gardening, photography, and cooking.
 
-## Project Goals
-
-- Build a full React + Flask CRUD application
-- Implement authentication with protected, user-owned data
-- Model related resources (boards and tasks)
-- Deliver a polished and presentation-ready user experience
-
 ## Core Functionality
 
 - User signup, login, and logout
@@ -153,43 +146,6 @@ Frontend runs at http://127.0.0.1:5173
 - If flask is not found, reactivate the backend virtual environment with source venv/bin/activate.
 - If port 5000 is in use, stop the other process or run backend on a different port and update client/src/services/api.js.
 - Stop both servers with Ctrl+C.
-
-## Auth Notes
-
-- The frontend stores the JWT in localStorage after signup/login.
-- Logout on the frontend clears the stored JWT and user state.
-- The backend also exposes POST /api/logout as a helper route, but token removal is handled in the client.
-
-## Submission Checklist
-
-- Public GitHub repository with complete code
-- Clean commit history showing progress
-- Proper .gitignore configuration
-- README with setup + feature documentation
-- Optional deployed links (Render/Netlify/etc.)
-
-## Demo Script (2-3 Minutes)
-
-1. Problem and audience
-- "Hobby projects get scattered across notes, messages, and memory. ProjectBoard gives makers one place to organize boards and tasks."
-
-2. Quick architecture
-- "This app uses React on the frontend and Flask + SQLAlchemy on the backend, with JWT authentication and ownership-based authorization."
-
-3. Auth flow
-- Create a user (or log in), then show that dashboard data is user-specific.
-
-4. Board CRUD
-- Create a new board, edit it, and delete one board to show full CRUD.
-
-5. Task CRUD inside a board
-- Open a board, add tasks, change status/priority, edit a task, and delete a task.
-
-6. Ownership/security callout
-- "All board/task routes are protected. Users can only read and modify their own records."
-
-7. Wrap-up
-- "ProjectBoard makes large hobby projects less overwhelming by turning ideas into trackable steps."
 
 ## Future Enhancements
 
